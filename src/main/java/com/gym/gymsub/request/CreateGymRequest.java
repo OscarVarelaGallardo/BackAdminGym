@@ -12,4 +12,5 @@ public class CreateGymRequest {
     private String logoUrl;
     @NotNull
     private Long userId;
+    private Boolean notificationsEnabled;
 }

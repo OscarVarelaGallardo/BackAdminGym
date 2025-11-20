@@ -45,6 +45,7 @@ public class GymInfoService {
                 .phone(request.getPhone())
                 .logoUrl(request.getLogoUrl())
                 .user(user)
+                .notificationsEnabled(request.getNotificationsEnabled() != null ? request.getNotificationsEnabled() : true)
                 .build();
 
         GymInfo saved = gymInfoRepository.save(gymInfo);
@@ -65,6 +66,9 @@ public class GymInfoService {
         gymInfo.setSchedule(request.getSchedule());
         gymInfo.setPhone(request.getPhone());
         gymInfo.setLogoUrl(request.getLogoUrl());
+        if (request.getNotificationsEnabled() != null) {
+            gymInfo.setNotificationsEnabled(request.getNotificationsEnabled()); // 👈
+        }
 
         GymInfo updated = gymInfoRepository.save(gymInfo);
         return convertToDto(updated);
@@ -80,6 +84,7 @@ public class GymInfoService {
         dto.setPhone(gymInfo.getPhone());
         dto.setLogoUrl(gymInfo.getLogoUrl());
         dto.setUserId(gymInfo.getUser().getId());
+        dto.setNotificationsEnabled(gymInfo.isNotificationsEnabled());
         return dto;
     }
 }

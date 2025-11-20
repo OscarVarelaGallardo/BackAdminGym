@@ -17,4 +17,5 @@ public class UpdateGymInfoRequest {
     private String schedule;
     private String phone;
     private String logoUrl;
+    private Boolean notificationsEnabled;
 }
