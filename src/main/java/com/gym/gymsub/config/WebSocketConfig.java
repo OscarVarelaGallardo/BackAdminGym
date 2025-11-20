@@ -1,5 +1,7 @@
 package com.gym.gymsub.config;
 
+
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -12,15 +14,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry
-                .addEndpoint("/ws")         // 👈 endpoint para conectar
-                .setAllowedOriginPatterns("*");
-        // Si fueras web browser, podrías agregar .withSockJS()
+        registry.addEndpoint("/ws")              // 👈 endpoint
+                .setAllowedOriginPatterns("*")   // para RN / Expo en LAN
+                .withSockJS();                   // si usas navegador
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/topic");   // destino para notificaciones
+        registry.enableSimpleBroker("/topic");   // 👈 prefijo del broker
         registry.setApplicationDestinationPrefixes("/app");
     }
 }

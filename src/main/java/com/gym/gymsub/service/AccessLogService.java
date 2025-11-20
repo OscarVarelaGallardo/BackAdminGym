@@ -34,7 +34,7 @@ public class AccessLogService {
 
         AccessLog saved = accessLogRepository.save(accessLog);
 
-        // Notificación WS
+        // DTO que mandas a los clientes
         AccessLogNotificationDto dto = new AccessLogNotificationDto(
                 user.getId(),
                 user.getName(),
@@ -43,6 +43,7 @@ public class AccessLogService {
                 saved.getAccessTime()
         );
 
+        // 👇 IMPORTANTE: topic exacto
         messagingTemplate.convertAndSend("/topic/access-logs", dto);
 
         return saved;
