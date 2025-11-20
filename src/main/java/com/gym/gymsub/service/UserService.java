@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -27,10 +28,13 @@ public class UserService {
                 .email(request.getEmail())
                 .phone(request.getPhone())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .qrToken(UUID.randomUUID().toString())
                 .build();
         return  userRepository.save(user);
     }
-
+    public User findByQrToken(String qrToken) {
+        return userRepository.findByQrToken(qrToken).orElse(null);
+    }
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }

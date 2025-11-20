@@ -26,7 +26,10 @@ public class User {
     private String phone;
 
     @Column(nullable = false)
-    private String password; // guardamos hash BCrypt
+    private String password;
+
+    @Column(name = "qr_token", unique = true)
+    private String qrToken;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -40,4 +43,5 @@ public class User {
     public void preUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
+
 }
