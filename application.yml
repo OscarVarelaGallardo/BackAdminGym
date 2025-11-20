@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gymdb
+    username: gymuser
+    password: gympass
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # luego lo cambiamos a validate en prod
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+
+server:
+  port: 8080
