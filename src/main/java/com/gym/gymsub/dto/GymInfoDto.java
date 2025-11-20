@@ -15,7 +15,7 @@ public class GymInfoDto {
     private String schedule;
     private String phone;
     private String logoUrl;
-
+    private Boolean notificationsEnabled;
     private Long userId;  // 👈 ESTE CAMPO FALTABA
 
 }

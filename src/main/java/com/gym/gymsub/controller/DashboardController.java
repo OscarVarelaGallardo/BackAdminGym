@@ -1,7 +1,7 @@
 package com.gym.gymsub.controller;
 
 
-import com.gym.gymsub.dto.DashboardSummaryResponse;
+import com.gym.gymsub.request.DashboardSummaryResponse;
 import com.gym.gymsub.service.DashboardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

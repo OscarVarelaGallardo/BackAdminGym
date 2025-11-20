@@ -1,4 +1,4 @@
-package com.gym.gymsub.dto;
+package com.gym.gymsub.request;
 
 
 import lombok.Data;

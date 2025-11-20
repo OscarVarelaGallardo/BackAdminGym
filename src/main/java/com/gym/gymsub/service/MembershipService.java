@@ -1,9 +1,9 @@
 package com.gym.gymsub.service;
 
-import com.gym.gymsub.dto.CreateMembershipRequest;
-import com.gym.gymsub.dto.UpdateMembershipRequest;
 import com.gym.gymsub.model.Membership;
 import com.gym.gymsub.repository.MembershipRepository;
+import com.gym.gymsub.request.CreateMembershipRequest;
+import com.gym.gymsub.request.UpdateMembershipRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

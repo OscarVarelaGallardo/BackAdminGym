@@ -1,12 +1,12 @@
 package com.gym.gymsub.service;
 
 
-import com.gym.gymsub.dto.DashboardSummaryResponse;
 import com.gym.gymsub.model.AccessLog.AccessType;
 import com.gym.gymsub.repository.AccessLogRepository;
 import com.gym.gymsub.repository.PaymentRepository;
 import com.gym.gymsub.repository.UserMembershipRepository;
 import com.gym.gymsub.repository.UserRepository;
+import com.gym.gymsub.request.DashboardSummaryResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

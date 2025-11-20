@@ -1,12 +1,12 @@
 package com.gym.gymsub.controller;
 
 
+import com.gym.gymsub.request.CreateMembershipRequest;
+import com.gym.gymsub.request.UpdateMembershipRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.gym.gymsub.dto.CreateMembershipRequest;
-import com.gym.gymsub.dto.UpdateMembershipRequest;
 import com.gym.gymsub.model.Membership;
 import com.gym.gymsub.service.MembershipService;
 import java.util.List;

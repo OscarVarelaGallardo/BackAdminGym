@@ -30,6 +30,9 @@ public class GymInfo {
     @Column(name = "logo_url")
     private String logoUrl;   // URL del logo
 
+    @Column(name = "notifications_enabled", nullable = false)
+    private boolean notificationsEnabled = true; // 👈 NUEVO
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
     private User user;
