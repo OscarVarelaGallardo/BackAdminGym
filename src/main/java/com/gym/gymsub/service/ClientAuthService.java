@@ -38,9 +38,7 @@ public class ClientAuthService {
         if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
             throw new IllegalArgumentException("Credenciales inválidas");
         }
-
         String token = jwtService.generateToken(user.getId());
-
         ClientLoginResponse.ClientUserDto userDto =
                 new ClientLoginResponse.ClientUserDto(
                         user.getId(),
@@ -64,8 +62,6 @@ public class ClientAuthService {
             if (existingUser != null && existingUser.isActive()) {
                 throw new IllegalArgumentException("El usuario ya existe");
             }
-
-
             ClientUser newUser = new ClientUser();
             newUser.setName(name);
             newUser.setEmail(email);
