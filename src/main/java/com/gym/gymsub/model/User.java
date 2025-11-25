@@ -44,4 +44,7 @@ public class User {
         this.updatedAt = LocalDateTime.now();
     }
 
+    @OneToOne(mappedBy = "user")
+    private GymInfo gymInfo;
+
 }

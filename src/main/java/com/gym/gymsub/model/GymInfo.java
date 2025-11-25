@@ -2,6 +2,8 @@ package com.gym.gymsub.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.gym.gymsub.model.SubscriptionStatus;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "gym_info")
@@ -33,7 +35,36 @@ public class GymInfo {
     @Column(name = "notifications_enabled", nullable = false)
     private boolean notificationsEnabled = true; // 👈 NUEVO
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id")
+
+    @OneToOne
+    @JoinColumn(name = "user_id", unique = true, nullable = false)
     private User user;
+
+    @Column(name = "trial_start_date")
+    private LocalDate trialStartDate;
+
+    @Column(name = "trial_end_date")
+    private LocalDate trialEndDate;
+
+    @Column(name = "paid_until")
+    private LocalDate paidUntil;
+
+    @Enumerated(EnumType.STRING)
+    private SubscriptionStatus subscriptionStatus;
+
+    private boolean blocked = false;
+
+
+    @PrePersist
+    public void prePersist() {
+        if (trialStartDate == null) {
+            trialStartDate = LocalDate.now();
+        }
+        if (trialEndDate == null) {
+            trialEndDate = trialStartDate.plusDays(15);
+        }
+        if (subscriptionStatus == null) {
+            subscriptionStatus = SubscriptionStatus.TRIAL;
+        }
+    }
 }

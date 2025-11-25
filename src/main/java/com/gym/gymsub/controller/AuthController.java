@@ -8,8 +8,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.gym.gymsub.security.JwtService;
 
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -18,6 +20,7 @@ import java.util.Map;
 public class AuthController {
 
     private final UserService userService;
+    private final JwtService jwtService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterUserRequest request) {
@@ -36,17 +39,25 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
-        return userService.findByEmail(request.getEmail())
-                .filter(u -> userService.isPasswordValid(u, request.getPassword()))
-                .map(u -> ResponseEntity.ok(Map.of(
-                        "id", u.getId(),
-                        "name", u.getName(),
-                        "email", u.getEmail()
+         Optional<User> userOpt =  userService.findByEmail(request.getEmail());
+        //Validar la contraseña
+        if (userOpt.isEmpty() || !userService.isPasswordValid(userOpt , request.getPassword())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(Map.of("message", "Correo electrónico o contraseña incorrectos"));
 
-                        // luego aquí devolvemos también el JWT
-                )))
-                .orElse(ResponseEntity
-                        .status(401)
-                        .body(Map.of("message", "Credenciales inválidas")));
+        }
+        User user = userOpt.get();
+        String token = jwtService.generateToken(String.valueOf(userOpt.get()));
+        return ResponseEntity.ok(Map.of(
+                "token", token,
+                "user", Map.of(
+                        "id", user.getId(),
+                        "name", user.getName(),
+                        "email", user.getEmail()
+                )
+        ));
+
+
     }
 }
